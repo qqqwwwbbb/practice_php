@@ -4,5 +4,13 @@
     <label>Имя <input type="text" name="name"></label>
     <label>Логин <input type="text" name="login"></label>
     <label>Пароль <input type="password" name="password"></label>
+    <label>
+        Роль<br>
+        <select name="id_role" id="id_role">
+            <option value="1">Пользователь</option>
+            <option value="2">Администратор</option>
+        </select>
+    </label><br>
+    <input type="file" name="avatar">
     <button>Зарегистрироваться</button>
 </form>
