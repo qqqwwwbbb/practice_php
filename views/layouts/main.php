@@ -8,6 +8,22 @@
     <link rel="stylesheet" href="style.css" type="text/css">
     <link rel = "stylesheet" href = "https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
     <title>My PHP site</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100;200;300;400&display=swap');
+
+        *{
+            font-family: Roboto Slab, serif;
+            font-weight: 400;
+            padding: 0;
+            margin: 0;
+        }
+        header {
+            position: absolute;
+        }
+        table {
+            position: absolute;
+        }
+    </style>
 </head>
 <body style="background-color: #ffedd5">
 <div class="container">
