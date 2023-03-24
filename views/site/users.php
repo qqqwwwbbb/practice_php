@@ -29,7 +29,8 @@
 
 <h3><?= $message ?? ''; ?></h3>
 
-<h3><?= app()->auth->user()->name ?? ''; ?></h3>
+<h3><b><?= app()->auth->user()->name ?? ''; ?></b> - name of this user</h3>
+<h3><b><?= app()->auth->user()->id_role ?? ''; ?></b> - ID of this user</h3>
 <?php
 if (!app()->auth::check()):
     ?>
