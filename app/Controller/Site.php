@@ -20,6 +20,10 @@ class Site
     {
         return new View('site.hello', ['message' => 'hello working']);
     }
+    public function users(): string
+    {
+        return new View('site.users', ['message' => 'list of users:']);
+    }
     public function signup(Request $request): string
     {
         if ($request->method === 'POST' && User::create($request->all())) {
