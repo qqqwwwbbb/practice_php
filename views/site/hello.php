@@ -4,7 +4,7 @@
     <form class="needs-validation" novalidate="">
         <div class="row g-7 d-flex justify-content-center my-5">
             <div class="col-md-3">
-                <label for="country" class="form-label">Читатели</label>
+                <label for="country" class="form-label">Авторы</label>
                 <select class="form-select" id="subunit" required="">
                     <?php
                     foreach ($subunits as $subunit) {
@@ -32,7 +32,7 @@
             </div>
             <div class="col-md-2 d-flex justify-content-start align-items-end">
                 <button style="height: 37px; font-size: 17px; padding-top: 5px;" class="w-100 btn btn-success btn-lg"
-                        type="submit">Применить
+                        type="submit">Выбрать книгу
                 </button>
             </div>
         </div>
