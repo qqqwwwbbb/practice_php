@@ -2,6 +2,10 @@
 
 namespace Controller;
 
+use Model\Subscriber;
+use Model\Subunit;
+use Model\Type_room;
+use Model\Room;
 use Model\Post;
 use Src\View;
 use Src\Request;
@@ -20,8 +24,35 @@ class Site
 
     public function hello(): string
     {
-        return new View('site.hello', ['message' => 'hello working']);
+        $sububits = Subunit::all();
+        $rooms = Room::all();
+        $subscribers = Subscriber::all();
+        return (new View())->render('site.hello', ['subscribers'=>$subscribers, 'subunits'=>$sububits, 'rooms'=>$rooms]);
     }
+
+    public function subscriber_add(Request $request): string
+    {
+        $subunits = Subunit::all();
+        $rooms = Room::all();
+        if ($request->method === 'POST' && Subscriber::create($request->all())) {
+            app()->route->redirect('/');
+        }
+        return new View('site.subscriber_add', ['subunits'=>$subunits, 'rooms'=>$rooms]);
+
+    }
+
+    public function subscriber(Request $request): string
+    {
+        $subscribers = Subscriber::where('id', $request->id ?? 0)->get();
+        $subunits = Subunit::all();
+        $type_subunits = Type_subunit::all();
+        $rooms = Room::all();
+        $type_rooms = Type_room::all();
+        return (new View())->render('site.subscriber', ['subscribers'=>$subscribers, 'subunits'=>$subunits, 'type_subunits'=>$type_subunits, 'rooms'=>$rooms, 'type_rooms'=>$type_rooms]);
+
+    }
+
+
     public function users(): string
     {
         return new View('site.users', ['message' => 'list of users:']);
