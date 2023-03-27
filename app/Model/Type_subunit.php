@@ -5,7 +5,7 @@ namespace Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Room extends Model
+class Type_subunit extends Model
 {
     use HasFactory;
 
@@ -13,7 +13,5 @@ class Room extends Model
     protected $fillable = [
         'id',
         'title',
-        'date',
-        'type_room_id',
     ];
 }

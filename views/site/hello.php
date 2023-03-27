@@ -4,11 +4,14 @@
     <form class="needs-validation" novalidate="">
         <div class="row g-7 d-flex justify-content-center my-5">
             <div class="col-md-3">
-                <label for="country" class="form-label">Авторы</label>
+                <label for="country" class="form-label">Книги</label>
                 <select class="form-select" id="subunit" required="">
                     <?php
                     foreach ($subunits as $subunit) {
-                        echo '<option value="' . $subunit->id . '">' . $subunit->id . ' - ' . $subunit->title . '</option>';
+                        echo '<option value="' . $subunit->id . '">' . $subunit->id . ' - ' . $subunit->title . ' - ' . $type_subunit->title .'</option>';
+                    }
+                    foreach ($type_subunits as $type_subunit) {
+                        echo '<option value="' . $type_subunit->id . '">' . $type_subunit->id . ' - ' . $type_subunit->title . '</option>';
                     }
                     ?>
                 </select>
@@ -18,11 +21,11 @@
             </div>
 
             <div class="col-md-3">
-                <label for="state" class="form-label">Книги</label>
+                <label for="state" class="form-label">Период</label>
                 <select class="form-select" id="room" required="">
                     <?php
-                    foreach ($rooms as $room) {
-                        echo '<option value="' . $room->id . '">' . $room->id . ' - ' . $room->title . '</option>';
+                    foreach ($type_subunits as $type_subunit) {
+                        echo '<option value="' . $type_subunit->id . '">' . $type_subunit->id . ' - ' . $type_subunit->title . '</option>';
                     }
                     ?>
                 </select>
@@ -43,7 +46,7 @@
     <div class="col-md-4 my-5">
         <div class="input-group">
             <p class="form-control">Количество книг выданных: </p>
-            <span class="input-group-text h-50">0</span>
+            <span class="input-group-text h-50">2</span>
         </div>
     </div>
 </div>
@@ -70,8 +73,8 @@ endif;
                     <th>Фамилия</th>
                     <th>Имя</th>
                     <th>Отчество</th>
-                    <th>Дата рождения</th>
-                    <th>?</th>
+                    <th>Дата взятия книги</th>
+                    <th>Взятая книга</th>
                     <th>Книги</th>
                     <th>Подробнее</th>
                 </tr>

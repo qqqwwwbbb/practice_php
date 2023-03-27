@@ -4,7 +4,7 @@ namespace Controller;
 
 use Model\Subscriber;
 use Model\Subunit;
-use Model\Type_room;
+use Model\Type_subunit;
 use Model\Room;
 use Model\Post;
 use Src\View;
