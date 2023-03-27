@@ -65,7 +65,8 @@ class Site
             $validator = new Validator($request->all(), [
                 'name' => ['required'],
                 'login' => ['required', 'unique:users,login'],
-                'password' => ['required']
+                'password' => ['required'],
+                'avatar' => ['required']
             ], [
                 'required' => 'Поле :field пусто',
                 'unique' => 'Поле :field должно быть уникально'
@@ -79,6 +80,19 @@ class Site
             if (User::create($request->all())) {
                 app()->route->redirect('/login');
             }
+            //загрузка аватара
+            if (isset($_FILES['avatar']) && $_FILES['avatar']['error'] != 4)
+            {
+                $filename = basename($_FILES['avatar']['name']);
+                echo $filename;
+                $rootPath=Settings::getRootPath();
+                move_uploaded_file($_FILES["avatar"]["tmp_name"], $rootPath.'/public/uploads/'.$filename);
+
+            }
+            User::create($request->all() + [
+                    'id_institute' => Auth::user()->institute->id,
+                    'avatar_url'=>$filename,
+                ]);
         }
         return new View('site.signup');
     }

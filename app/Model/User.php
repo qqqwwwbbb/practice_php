@@ -15,7 +15,8 @@ class User extends Model implements IdentityInterface
         'id_role',
         'name',
         'login',
-        'password'
+        'password',
+        'avatar'
     ];
 
     protected static function booted()
@@ -36,6 +37,13 @@ class User extends Model implements IdentityInterface
     public function getId(): int
     {
         return $this->id;
+    }
+
+    public static function getAvatarUrl()
+    {
+        $avatarUrl=DB::selectOne('select avatar_url from users where id= ?',[app()->auth::user()->id]);
+        $avatarUrl=((array) $avatarUrl)['avatar_url'];
+        return $avatarUrl;
     }
 
     //Возврат аутентифицированного пользователя

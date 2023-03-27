@@ -31,6 +31,10 @@
                             <option value="3">Читатель</option>
                         </select>
                     </div>
+                    <div class="form-floating mb-3" bis_skin_checked="1">
+                        <p>Добавить аватар</p>
+                    <input type="file" name="avatar">
+                    </div>
                     <button class="w-100 mb-2 btn btn-lg rounded-4 btn-success" type="submit">Войти</button>
                 </form>
             </div>
