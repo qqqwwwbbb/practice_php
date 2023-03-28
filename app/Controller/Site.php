@@ -79,6 +79,7 @@ class Site
 
             if (User::create($request->all())) {
                 app()->route->redirect('/login');
+                return false;
             }
             //загрузка аватара
             if (isset($_FILES['avatar']) && $_FILES['avatar']['error'] != 4)
@@ -116,5 +117,4 @@ class Site
         Auth::logout();
         app()->route->redirect('/hello');
     }
-
 }

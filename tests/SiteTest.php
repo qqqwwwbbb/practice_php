@@ -56,7 +56,7 @@ class SiteTest extends TestCase
                 '<h3>{"login":["Поле login должно быть уникально"]}</h3>',
             ],
             ['POST', ['name' => 'admin', 'login' => md5(time()), 'password' => 'admin'],
-                'Location: /pop-it-mvc/hello',
+                'Location: /practice_php/login',
             ],
         ];
 
@@ -65,13 +65,13 @@ class SiteTest extends TestCase
     protected function setUp(): void
     {
         //Установка переменной среды
-        $_SERVER['DOCUMENT_ROOT'] = '/var/www';
+        $_SERVER['DOCUMENT_ROOT'] = 'D:\xampp\htdocs';
 
         //Создаем экземпляр приложения
         $GLOBALS['app'] = new Src\Application(new Src\Settings([
-            'app' => include $_SERVER['DOCUMENT_ROOT'] . '/pop-it-mvc/config/app.php',
-            'db' => include $_SERVER['DOCUMENT_ROOT'] . '/pop-it-mvc/config/db.php',
-            'path' => include $_SERVER['DOCUMENT_ROOT'] . '/pop-it-mvc/config/path.php',
+            'app' => include $_SERVER['DOCUMENT_ROOT'] . '/practice_php/config/app.php',
+            'db' => include $_SERVER['DOCUMENT_ROOT'] . '/practice_php/config/db.php',
+            'path' => include $_SERVER['DOCUMENT_ROOT'] . '/practice_php/config/path.php',
         ]));
 
         //Глобальная функция для доступа к объекту приложения
@@ -82,7 +82,4 @@ class SiteTest extends TestCase
             }
         }
     }
-
-
-
 }
