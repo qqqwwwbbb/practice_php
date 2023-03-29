@@ -1,5 +1,6 @@
 <?php
 use PHPUnit\Framework\TestCase;
+use Src\Auth\Auth;
 
 class SiteTest extends TestCase
 {
@@ -82,4 +83,56 @@ class SiteTest extends TestCase
             }
         }
     }
+    /**
+     * @dataProvider additionProviderLogin
+     */
+    public function testLogin(string $httpMethod, array $userData, string $message): void
+    {
+        // Создаем заглушку для класса Request.
+        $request = $this->createMock(\Src\Request::class);
+        // Переопределяем метод all() и свойство method
+        $request->expects($this->any())
+            ->method('all')
+            ->willReturn($userData);
+        $request->method = $httpMethod;
+
+        //Сохраняем результат работы метода в переменную
+        $result = (new \Controller\Site())->login($request);
+
+        if (!empty($result)) {
+            //Проверяем варианты с ошибками валидации
+            $message = '/' . preg_quote($message, '/') . '/';
+            $this->expectOutputRegex($message);
+            return;
+        }
+        //Проверяем добавился ли пользователь в базу данных
+        $this->assertTrue((bool)Auth::user());
+
+        //Проверяем редирект при успешной регистрации
+        $this->assertContains($message, xdebug_get_headers());
+
+    }
+
+    public function additionProviderLogin(): array
+    {
+        return [
+            ['GET', ['username' => '', 'password' => ''],
+                '<h3></h3>'
+            ],
+            ['POST', ['username' => '', 'password' => ''],
+                '<h3>{"username":["Поле username пусто"],"password":["Поле password пусто"]}</h3>',
+            ],
+            ['POST', ['username' => md5(time()), 'password' => 'admin'],
+                '<h3>Неправильные логин или пароль</h3>',
+            ],
+            ['POST', ['username' => 'qwe1', 'password' => 'qwe1'],
+                'Location: /practice/'
+            ],
+        ];
+    }
+
+
+    /**
+     * @dataProvider additionProviderCreateDiagnosis
+     */
 }
