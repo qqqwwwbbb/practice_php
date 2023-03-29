@@ -21,7 +21,7 @@
             position: absolute;
         }
         table {
-            position: absolute;
+            display: inline-block;
         }
     </style>
 </head>

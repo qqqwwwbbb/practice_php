@@ -9,7 +9,10 @@
         "illuminate/database": "^11.0@dev",
         "illuminate/events": "^11.0@dev",
         "nikic/fast-route": "^2.0@dev",
-        "qqqwwwbbb/collect": "dev-master"
+        "qqqwwwbbb/collect": "dev-master",
+        "qqqwwwbbb/session": "dev-master",
+        "qqqwwwbbb/workwithfiles": "dev-master",
+        "intervention/image": "^3.0@alpha"
 
     },
     "autoload": {

@@ -6,12 +6,15 @@ use Model\Subscriber;
 use Model\Subunit;
 use Model\Type_subunit;
 use Model\Room;
+use Model\Type_room;
 use Model\Post;
 use Src\View;
 use Src\Request;
 use Model\User;
 use Src\Auth\Auth;
 use Src\Validator\Validator;
+use Illuminate\Support\Facades\Storage;
+use Intervention\Image\Facades\Image;
 
 
 class Site
@@ -22,12 +25,22 @@ class Site
         return (new View())->render('site.post', ['posts' => $posts]);
     }
 
-    public function hello(): string
+    public function hello(Request $request): string
     {
-        $sububits = Subunit::all();
+        $subunits = Subunit::all();
         $rooms = Room::all();
         $subscribers = Subscriber::all();
-        return (new View())->render('site.hello', ['subscribers'=>$subscribers, 'subunits'=>$sububits, 'rooms'=>$rooms]);
+        return (new View())->render('site.hello', ['subscribers'=>$subscribers, 'subunits'=>$subunits, 'rooms'=>$rooms]);
+    }
+
+    public function search()
+    {
+        $subunits = Subunit::query();
+
+        if (isset($request['search'])) {
+            $subunits = $subunits->where('title', 'like', '%'.$request['search'].'%');
+        }
+        return (new View())->render('site.search', ['subunits'=>$subunits]);
     }
 
     public function subscriber_add(Request $request): string
@@ -55,7 +68,7 @@ class Site
 
     public function users(): string
     {
-        return new View('site.users', ['message' => 'list of users:']);
+        return new View('site.users', ['message' => 'Your profile : ']);
     }
 
     public function signup(Request $request): string
@@ -63,13 +76,14 @@ class Site
         if ($request->method === 'POST') {
 
             $validator = new Validator($request->all(), [
-                'name' => ['required'],
+                'name' => ['required','language'],
                 'login' => ['required', 'unique:users,login'],
                 'password' => ['required'],
                 'avatar' => ['required']
             ], [
                 'required' => 'Поле :field пусто',
-                'unique' => 'Поле :field должно быть уникально'
+                'unique' => 'Поле :field должно быть уникально',
+                'language'=>'Имя должно содержать только кириллицу'
             ]);
 
             if($validator->fails()){
@@ -82,18 +96,19 @@ class Site
                 return false;
             }
             //загрузка аватара
-            if (isset($_FILES['avatar']) && $_FILES['avatar']['error'] != 4)
-            {
-                $filename = basename($_FILES['avatar']['name']);
-                echo $filename;
-                $rootPath=Settings::getRootPath();
-                move_uploaded_file($_FILES["avatar"]["tmp_name"], $rootPath.'/public/uploads/'.$filename);
+            $request = app('request');
+            if ($request->hasfile('avatar')) {
+                $avatar = $request->file('avatar');
+                $filename = time() . '.' . $avatar->getClientOriginalExtension();
 
+                //Implement check here to create directory if not exist already
+
+                Image::make($avatar)->resize(300, 300)->save(public_path('public/avatars/' . $filename));
             }
-            User::create($request->all() + [
-                    'id_institute' => Auth::user()->institute->id,
-                    'avatar_url'=>$filename,
-                ]);
+
+            return User::create([
+                'avatar' => !empty($filename) ? $filename : 'default_avatar.png',
+            ]);
         }
         return new View('site.signup');
     }

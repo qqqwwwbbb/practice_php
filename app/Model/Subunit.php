@@ -15,4 +15,17 @@ class Subunit extends Model
         'title',
         'type_subunit_id'
     ];
+
+    public function search($request)
+    {
+        {
+            $subunits = Subunit::query();
+
+            if (isset($request['search'])) {
+                $subunits = $subunits->where('title', 'like', '%'.$request['search'].'%');
+            }
+
+            return $subunits->paginate(1);
+        }
+    }
 }

@@ -50,6 +50,16 @@
         </div>
     </div>
 </div>
+<div class="container">
+    <div class="col-md-4 my-5">
+        <div class="input-group">
+            <form class="form-inline my-2 my-lg-0" type="get" action="{{ /search }}">
+            <input type="search" name="query" class="form-control rounded" placeholder="Найти книгу..." aria-label="Search"
+                   aria-describedby="search-addon">
+            </form>
+        </div>
+    </div>
+</div>
 <?php
 if (app()->auth::check() && app()->auth::user()->name === 'admin'):
     ?>

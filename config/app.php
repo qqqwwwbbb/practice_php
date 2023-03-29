@@ -16,7 +16,15 @@ return [
     ],
     'validators' => [
         'required' => \Validators\RequireValidator::class,
-        'unique' => \Validators\UniqueValidator::class
-    ]
+        'unique' => \Validators\UniqueValidator::class,
+        'language'=>\Validators\LanguageValidator::class,
+        'isNumber'=>\Validators\NumberValidator::class,
+    ],
+    'providers' => [
+        Intervention\Image\ImageServiceProvider::class,
+    ],
+    'aliases' => [
+        'Image' => Intervention\Image\Facades\Image::class,
+    ],
 ];
 
