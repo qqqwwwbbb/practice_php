@@ -57,7 +57,7 @@ class SiteTest extends TestCase
                 '<h3>{"login":["Поле login должно быть уникально"]}</h3>',
             ],
             ['POST', ['name' => 'admin', 'login' => md5(time()), 'password' => 'admin'],
-                'Location: /practice_php/login',
+                'Location: /practice_php/signup',
             ],
         ];
 
@@ -86,6 +86,7 @@ class SiteTest extends TestCase
     /**
      * @dataProvider additionProviderLogin
      */
+    // ++++++++++++++++++++++++++++++++++++++++++++
     public function testLogin(string $httpMethod, array $userData, string $message): void
     {
         // Создаем заглушку для класса Request.
@@ -126,7 +127,7 @@ class SiteTest extends TestCase
                 '<h3>Неправильные логин или пароль</h3>',
             ],
             ['POST', ['username' => 'qwe1', 'password' => 'qwe1'],
-                'Location: /practice/'
+                'Location: /practice_php/login'
             ],
         ];
     }
