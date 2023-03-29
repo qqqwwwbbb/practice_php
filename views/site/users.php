@@ -31,6 +31,9 @@
 <h3><b><?= app()->auth->user()->name ?? ''; ?></b> - Your name</h3>
 <h3><b><?= app()->auth->user()->login ?? ''; ?></b> - ID of this user</h3>
 <h3><b><?= app()->auth->user()->avatar ?? ''; ?></b></h3>
+<div class="col-md-6">
+    <img src="/public/uploads/{{ Auth::user()->avatar }}" alt="Image">
+</div>
 <?php
 if (!app()->auth::check()):
     ?>
