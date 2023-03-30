@@ -3,8 +3,23 @@
     <a class="text-success text-decoration-none" href="/"><h5>< Назад</h5></a>
 </div>
 
-<h1 class=" mt-5 fw-bold mb-4 d-flex justify-content-center">Reader</h1>
+<h1 class=" mt-5 fw-bold mb-4 d-flex justify-content-center">Страничка читателя</h1>
+<div class="container d-flex justify-content-center">
 
+    <div class="col-md-7 col-lg-8">
+        <div class="row g-3 d-flex justify-content-center">
+
+            <div class="col-sm-6 mt-5 d-flex flex-column align-items-center">
+<?php
+foreach ($subscribers as $subscriber) {
+    echo '<tr>';
+    echo '<td>' . '<b>' . $subscriber->id . '</b>' . '<h5>Номер читательского билета</h5> ' . '</td>';
+}
+?>
+                <div class="invalid-feedback">
+                    Valid first name is required.
+                </div>
+            </div>
 <div class="container d-flex justify-content-center">
 
     <div class="col-md-7 col-lg-8">
@@ -65,11 +80,11 @@
                 </div>
             </div>
 
-            <h4 class="mt-5 d-flex justify-content-center">Books</h4>
+            <h4 class="mt-5 d-flex justify-content-center">Книги</h4>
 
 
             <div class="col-sm-6 d-flex flex-column align-items-center">
-                <label for="firstName" class="form-label"><h5>Название</h5></label>
+                <label for="firstName" class="form-label"><h5>Любимые книги</h5></label>
                 <hr style="background-color: #0b4c0b; height: 2px;" class="w-50 mt-1">
                 <?php
                 foreach ($subunits as $subunit) {
@@ -84,7 +99,7 @@
             </div>
 
             <div class="col-sm-6 d-flex flex-column align-items-center">
-                <label for="firstName" class="form-label"><h5>Вид</h5></label>
+                <label for="firstName" class="form-label"><h5>Любимые автора</h5></label>
                 <hr style="background-color: #0b4c0b; height: 2px;" class="w-50 mt-1">
                 <?php
                 foreach ($subunits as $subunit) {
@@ -92,42 +107,6 @@
                         foreach ($type_subunits as $type_subunit) {
                             if ($subunit->type_subunit_id == $type_subunit->id) {
                                 echo '<p>' . $type_subunit->title . '</p>';
-                            }
-                        }
-                    }
-                }
-                ?>
-                <div class="invalid-feedback">
-                    Valid first name is required.
-                </div>
-            </div>
-
-            <h4 class="mt-5 d-flex justify-content-center">Books</h4>
-
-            <div class="col-sm-6 d-flex flex-column align-items-center mb-5">
-                <label for="firstName" class="form-label"><h5>Название</h5></label>
-                <hr style="background-color: #0b4c0b; height: 2px;" class="w-50 mt-1">
-                <?php
-                foreach ($rooms as $room) {
-                    if ($room->id == $subscriber->room_id) {
-                        echo '<p>' . $room->title . '</p>';
-                    }
-                }
-                ?>
-                <div class="invalid-feedback">
-                    Valid first name is required.
-                </div>
-            </div>
-
-            <div class="col-sm-6 d-flex flex-column align-items-center mb-5">
-                <label for="firstName" class="form-label"><h5>Вид</h5></label>
-                <hr style="background-color: #0b4c0b; height: 2px;" class="w-50 mt-1">
-                <?php
-                foreach ($rooms as $room) {
-                    if ($room->id == $subscriber->room_id) {
-                        foreach ($type_rooms as $type_room) {
-                            if ($room->type_room_id == $type_room->id) {
-                                echo '<p>' . $type_room->title . '</p>';
                             }
                         }
                     }
