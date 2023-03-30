@@ -61,7 +61,7 @@
     </div>
 </div>
 <?php
-if (app()->auth::check() && app()->auth::user()->name === 'admin'):
+if (app()->auth::check() && app()->auth::user()->login === 'admin'):
     ?>
     <div class="container">
         <div class="d-flex justify-content-center mt-5">
