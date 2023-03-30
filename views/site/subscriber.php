@@ -1,6 +1,6 @@
 <h3><?= $message ?? ''; ?></h3>
 <div class="container mt-4">
-    <a class="text-success text-decoration-none" href="/"><h5>< Назад</h5></a>
+    <a class="text-success text-decoration-none" href="hello"><h5>< Назад</h5></a>
 </div>
 
 <h1 class=" mt-5 fw-bold mb-4 d-flex justify-content-center">Страничка читателя</h1>
