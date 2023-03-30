@@ -21,10 +21,15 @@ return [
         'isNumber'=>\Validators\NumberValidator::class,
     ],
     'providers' => [
-        Intervention\Image\ImageServiceProvider::class,
+      //  Intervention\Image\ImageServiceProvider::class,
+        'kernel' => \Providers\KernelProvider::class,
+        'route' => \Providers\RouteProvider::class,
+        'db' => \Providers\DBProvider::class,
+        'auth' => \Providers\AuthProvider::class,
     ],
     'aliases' => [
         'Image' => Intervention\Image\Facades\Image::class,
-    ],
+    ]
+
 ];
 
