@@ -1,13 +1,4 @@
 <h2><?= $message ?? ''; ?></h2>
-<?php
-if (app()->auth::check() && app()->auth::user()->name !== 'admin'):
-?>
-<div class="container mt-4">
-    <a href="<?= app()->route->getUrl('/hello') ?>"<h5>< Назад</h5></a>
-</div>
-<?php
-endif;
-?>
 <div class="container mt-4">
     <a href="<?= app()->route->getUrl('/hello') ?>"<h5>< Назад</h5></a>
 </div>
@@ -16,6 +7,7 @@ endif;
 
     <div class="col-md-7 col-lg-8">
         <form method="post" class="needs-validation" novalidate="">
+            <input name="csrf_token" type="hidden" value="<?= app()->auth::generateCSRF() ?>"/>
             <div class="row g-3">
                 <div class="col-sm-6 mt-5">
                     <label for="firstName" class="form-label">Фамилия</label>

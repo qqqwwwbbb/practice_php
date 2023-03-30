@@ -134,6 +134,6 @@ class SiteTest extends TestCase
 
 
     /**
-     * @dataProvider additionProviderCreateDiagnosis
+     * @dataProvider additionProviderLogin
      */
 }
