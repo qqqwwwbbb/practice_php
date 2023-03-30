@@ -123,10 +123,10 @@ class SiteTest extends TestCase
             ['POST', ['username' => '', 'password' => ''],
                 '<h3>{"username":["Поле username пусто"],"password":["Поле password пусто"]}</h3>',
             ],
-            ['POST', ['username' => md5(time()), 'password' => 'admin'],
+            ['POST', ['username' => 'root', 'password' => '123'],
                 '<h3>Неправильные логин или пароль</h3>',
             ],
-            ['POST', ['username' => 'qwe1', 'password' => 'qwe1'],
+            ['POST', ['username' => 'admin', 'password' => '123'],
                 'Location: /practice_php/login'
             ],
         ];
