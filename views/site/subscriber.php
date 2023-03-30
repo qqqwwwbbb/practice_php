@@ -99,7 +99,7 @@ foreach ($subscribers as $subscriber) {
             </div>
 
             <div class="col-sm-6 d-flex flex-column align-items-center">
-                <label for="firstName" class="form-label"><h5>Любимые автора</h5></label>
+                <label for="firstName" class="form-label"><h5>Любимые авторы</h5></label>
                 <hr style="background-color: #0b4c0b; height: 2px;" class="w-50 mt-1">
                 <?php
                 foreach ($subunits as $subunit) {
